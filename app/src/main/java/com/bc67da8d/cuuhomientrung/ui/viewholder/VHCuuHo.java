@@ -7,6 +7,9 @@ import androidx.annotation.NonNull;
 
 import com.bc67da8d.cuuhomientrung.R;
 import com.bc67da8d.cuuhomientrung.model.CuuHo;
+import com.bc67da8d.cuuhomientrung.util.HelperFormat;
+
+import static com.bc67da8d.cuuhomientrung.util.HelperFormat.getDateFormatedFromDateText;
 
 public class VHCuuHo extends VHBase<CuuHo> {
 
@@ -24,8 +27,9 @@ public class VHCuuHo extends VHBase<CuuHo> {
     @Override
     public void notifyDataSetChanged() {
         if (getModel() != null){
-            tvUpdateTime.setText(getModel().getUpdateTime());
-//            tvStatus.setText(getModel().getStatus());
+            tvUpdateTime.setText(getDateFormatedFromDateText(getModel().getUpdateTime()));
+            tvStatus.setText(HelperFormat.getCuuHoStatus(getModel().getStatus()));
+            tvStatus.setBackgroundColor(HelperFormat.getCuuHoColor(getModel().getStatus()));
             tvName.setText(getModel().getName());
             tvPhone.setText(getModel().getPhone());
             tvNote.setText(getModel().getNote());

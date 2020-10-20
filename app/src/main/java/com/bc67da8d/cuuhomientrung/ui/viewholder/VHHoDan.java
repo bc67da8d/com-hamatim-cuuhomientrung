@@ -7,6 +7,9 @@ import androidx.annotation.NonNull;
 
 import com.bc67da8d.cuuhomientrung.R;
 import com.bc67da8d.cuuhomientrung.model.HoDan;
+import com.bc67da8d.cuuhomientrung.util.HelperFormat;
+
+import static com.bc67da8d.cuuhomientrung.util.HelperFormat.getDateFormatedFromDateText;
 
 public class VHHoDan extends VHBase<HoDan> {
 
@@ -24,8 +27,9 @@ public class VHHoDan extends VHBase<HoDan> {
     @Override
     public void notifyDataSetChanged() {
         if (getModel() != null){
-            tvUpdateTime.setText(getModel().getUpdateTime());
-//            tvStatus.setText(getModel().getStatus());
+            tvUpdateTime.setText(getDateFormatedFromDateText(getModel().getUpdateTime()));
+            tvStatus.setText(HelperFormat.getHoDanStatus(getModel().getStatus()));
+            tvStatus.setBackgroundColor(HelperFormat.getHoDanColor(getModel().getStatus()));
             tvName.setText(getModel().getName());
             tvPhone.setText(getModel().getPhone());
             tvNote.setText(getModel().getNote());

@@ -12,6 +12,7 @@
         android:title="Cuu ho" />
 
     <item
+        android:visible="false"
         android:id="@+id/fmTinhNguyenVien"
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="TNV" />

@@ -25,7 +25,11 @@ public class ProviderAPI {
         return instance;
     }
 
-    public <T> T get(final Class<T> service) {
+    public static <T> T get(final Class<T> service) {
+        return getInstance().getApi(service);
+    }
+
+    private <T> T getApi(final Class<T> service) {
         if (null == cached.get(service.getCanonicalName())) {
             cached.put(service.getCanonicalName(), getRetrofit().create(service));
         }
@@ -48,7 +52,7 @@ public class ProviderAPI {
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(logging);  // <-- this is the important line!
-        enableAllTLS(httpClient);
+//        enableAllTLS(httpClient);
         return httpClient.build();
     }
 

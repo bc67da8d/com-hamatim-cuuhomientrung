@@ -24,12 +24,12 @@ public class AdapterCuuHo extends AdapterBase<CuuHo, VHCuuHo> {
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.layout_item_general;
+        return R.layout.layout_item_cuuho;
     }
 
     @Override
     public void onBindViewHolder(@NonNull VHCuuHo holder, int position) {
-
+        holder.setModel(getItem(position));
     }
 
 }

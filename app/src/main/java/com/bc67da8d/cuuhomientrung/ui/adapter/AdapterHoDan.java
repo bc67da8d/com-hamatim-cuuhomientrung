@@ -22,12 +22,12 @@ public class AdapterHoDan extends AdapterBase<HoDan, VHHoDan> {
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.layout_item_general;
+        return R.layout.layout_item_hodan;
     }
 
     @Override
     public void onBindViewHolder(@NonNull VHHoDan holder, int position) {
-
+        holder.setModel(getItem(position));
     }
 
 }

@@ -20,12 +20,12 @@ public class AdapterTinhNguyenVien extends AdapterBase<TinhNguyenVien, VHTinhNgu
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.layout_item_general;
+        return R.layout.layout_item_tinhnguyenvien;
     }
 
     @Override
     public void onBindViewHolder(@NonNull VHTinhNguyenVien holder, int position) {
-
+        holder.setModel(getItem(position));
     }
 
 }

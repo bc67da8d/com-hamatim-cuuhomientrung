@@ -8,6 +8,10 @@ import androidx.annotation.NonNull;
 import com.hamatim.cuuhomientrung.R;
 import com.hamatim.cuuhomientrung.model.CuuHo;
 import com.hamatim.cuuhomientrung.ui.viewholder.VHCuuHo;
+import com.hamatim.cuuhomientrung.util.TimeComparator;
+
+import java.util.Collections;
+import java.util.Comparator;
 
 public class AdapterCuuHo extends AdapterBase<CuuHo, VHCuuHo> {
 
@@ -28,6 +32,10 @@ public class AdapterCuuHo extends AdapterBase<CuuHo, VHCuuHo> {
     @Override
     public void onBindViewHolder(@NonNull VHCuuHo holder, int position) {
         holder.setModel(getItem(position));
+    }
+
+    public void doSort(Comparator<TimeComparator.TimeShortable> comparable){
+        Collections.sort(getmList(), comparable);
     }
 
 }

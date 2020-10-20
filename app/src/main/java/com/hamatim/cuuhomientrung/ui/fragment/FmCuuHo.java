@@ -10,6 +10,7 @@ import com.hamatim.cuuhomientrung.R;
 import com.hamatim.cuuhomientrung.model.CuuHo;
 import com.hamatim.cuuhomientrung.provider.ProviderVM;
 import com.hamatim.cuuhomientrung.ui.adapter.AdapterCuuHo;
+import com.hamatim.cuuhomientrung.util.TimeComparator;
 
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class FmCuuHo extends FmBaseList<CuuHo, AdapterCuuHo> {
     private Observer<? super List<CuuHo>> getListCuuHoWatcher() {
         return list -> {
             getAdapter().setmList(list);
+            getAdapter().doSort(TimeComparator.getDesc());
             getAdapter().notifyDataSetChanged();
         };
     }

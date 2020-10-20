@@ -10,7 +10,9 @@ import com.hamatim.cuuhomientrung.R;
 import com.hamatim.cuuhomientrung.model.HoDan;
 import com.hamatim.cuuhomientrung.provider.ProviderVM;
 import com.hamatim.cuuhomientrung.ui.adapter.AdapterHoDan;
+import com.hamatim.cuuhomientrung.util.TimeComparator;
 
+import java.sql.Time;
 import java.util.List;
 
 public class FmHoDan extends FmBaseList<HoDan, AdapterHoDan> {
@@ -43,6 +45,7 @@ public class FmHoDan extends FmBaseList<HoDan, AdapterHoDan> {
     private Observer<? super List<HoDan>> getListHoDanWatcher() {
         return list -> {
             getAdapter().setmList(list);
+            getAdapter().doSort(TimeComparator.getDesc());
             getAdapter().notifyDataSetChanged();
         };
     }

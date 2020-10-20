@@ -6,8 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.hamatim.cuuhomientrung.model.HoDan;
 import com.hamatim.cuuhomientrung.ui.viewholder.VHBase;
+import com.hamatim.cuuhomientrung.util.TimeComparator;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public abstract class AdapterBase<M, V extends VHBase> extends RecyclerView.Adapter<V> {

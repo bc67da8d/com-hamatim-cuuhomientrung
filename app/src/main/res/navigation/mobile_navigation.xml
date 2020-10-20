@@ -3,23 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/fmHoDan">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.bc67da8d.cuuhomientrung.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
-
+        android:id="@+id/fmHoDan"
+        android:name="com.bc67da8d.cuuhomientrung.ui.fragment.FmHoDan"
+        android:label="FmHoDan" />
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.bc67da8d.cuuhomientrung.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
+        android:id="@+id/fmCuuHo"
+        android:name="com.bc67da8d.cuuhomientrung.ui.fragment.FmCuuHo"
+        android:label="FmCuuHo" />
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.bc67da8d.cuuhomientrung.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/fmTinhNguyenVien"
+        android:name="com.bc67da8d.cuuhomientrung.ui.fragment.FmTinhNguyenVien"
+        android:label="FmTinhNguyenVien" />
 </navigation>

@@ -48,7 +48,7 @@ public class ProviderAPI {
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(logging);  // <-- this is the important line!
-        httpClient = enableAllTLS(httpClient);
+        enableAllTLS(httpClient);
         return httpClient.build();
     }
 

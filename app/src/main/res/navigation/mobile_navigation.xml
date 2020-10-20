@@ -7,14 +7,14 @@
 
     <fragment
         android:id="@+id/fmHoDan"
-        android:name="com.bc67da8d.cuuhomientrung.ui.fragment.FmHoDan"
+        android:name="com.hamatim.cuuhomientrung.ui.fragment.FmHoDan"
         android:label="FmHoDan" />
     <fragment
         android:id="@+id/fmCuuHo"
-        android:name="com.bc67da8d.cuuhomientrung.ui.fragment.FmCuuHo"
+        android:name="com.hamatim.cuuhomientrung.ui.fragment.FmCuuHo"
         android:label="FmCuuHo" />
     <fragment
         android:id="@+id/fmTinhNguyenVien"
-        android:name="com.bc67da8d.cuuhomientrung.ui.fragment.FmTinhNguyenVien"
+        android:name="com.hamatim.cuuhomientrung.ui.fragment.FmTinhNguyenVien"
         android:label="FmTinhNguyenVien" />
 </navigation>

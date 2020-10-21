@@ -19,23 +19,23 @@ import java.util.List;
 public class VMHoDan extends ViewModel {
 
     private MutableLiveData<List<HoDan>> listHoDanLiveData;
-    private MutableLiveData<HoDan> formHoDanLiveData;
+    private MutableLiveData<HoDan> formLiveData;
     private MutableLiveData<Event> eventLiveData;
 
     public VMHoDan() {
         this.listHoDanLiveData = new MutableLiveData<>();
-        this.formHoDanLiveData = new MutableLiveData<>();
+        this.formLiveData = new MutableLiveData<>();
         this.eventLiveData = new MutableLiveData<>();
         HoDan hoDan = new HoDan();
-        formHoDanLiveData.setValue(hoDan);
+        formLiveData.setValue(hoDan);
     }
 
     public LiveData<List<HoDan>> watchListHoDan(){
         return listHoDanLiveData;
     }
 
-    public LiveData<HoDan> watchFormHoDan(){
-        return formHoDanLiveData;
+    public LiveData<HoDan> watchForm(){
+        return formLiveData;
     }
 
     public LiveData<Event> watchEvent(){
@@ -64,12 +64,12 @@ public class VMHoDan extends ViewModel {
                 }, formHodan);
     }
 
-    public void initFormHoDan(HoDan hoDan){
-        formHoDanLiveData.postValue(hoDan);
+    public void initForm(HoDan hoDan){
+        formLiveData.postValue(hoDan);
     }
 
-    public HoDan getFormHoDan(){
-        return formHoDanLiveData.getValue();
+    public HoDan getForm(){
+        return formLiveData.getValue();
     }
 
     public void eventProcessed() {

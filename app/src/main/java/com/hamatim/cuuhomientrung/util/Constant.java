@@ -12,6 +12,14 @@ public class Constant {
             "Gặp nạn"
     };
 
+    public static final String[] CUUHO_STATUS_LIST = {
+            "Chưa xác minh",
+            "Sẵn sàng",
+            "Không gọi được",
+            "Đang cứu hộ",
+            "Đang nghỉ"
+    };
+
     public static enum STATE {
         SUCCESS,
         FAIL,

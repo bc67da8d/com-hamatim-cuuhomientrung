@@ -1,18 +1,16 @@
 package com.hamatim.cuuhomientrung.ui.fragment;
 
-import android.app.AlertDialog;
-
 import androidx.lifecycle.Observer;
 
 import com.hamatim.cuuhomientrung.model.Event;
 import com.hamatim.cuuhomientrung.provider.ProviderVM;
 import com.hamatim.cuuhomientrung.util.Constant;
 
-public class FmHoDanEdit extends FmHoDanCreate {
+public class FmCuuHoEdit extends FmCuuHoCreate {
 
     @Override
     protected void performSubmit() {
-        ProviderVM.getHoDanVM().update(getForm());
+        ProviderVM.getCuuHoVM().update(getForm());
     }
 
     @Override

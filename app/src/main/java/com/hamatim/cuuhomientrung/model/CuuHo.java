@@ -152,4 +152,22 @@ public class CuuHo implements TimeComparator.TimeShortable {
         return getName();
     }
 
+    public void clone(CuuHo hoDan) {
+        setId(hoDan.getId());
+        setUpdateTime(hoDan.getUpdateTime());
+
+        setLocation(hoDan.getLocation());
+        setTinh(hoDan.getTinh());
+        setHuyen(hoDan.getHuyen());
+        setXa(hoDan.getXa());
+        setThon(hoDan.getThon());
+
+        setVolunteer(hoDan.getVolunteer());
+
+        setName(hoDan.getName());
+        setPhone(hoDan.getPhone());
+        setStatus(hoDan.getStatus());
+        setNote(hoDan.getNote());
+    }
+
 }

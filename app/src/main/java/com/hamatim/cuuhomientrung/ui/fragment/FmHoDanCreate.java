@@ -37,16 +37,9 @@ import java.util.List;
 
 import static com.hamatim.cuuhomientrung.util.Constant.HODAN_STATUS_LIST;
 
-public class FmHoDanCreate extends FmBase {
+public class FmHoDanCreate extends FmBaseCreate {
 
-    private static final String TAG = "FmHoDanCreate";
-    private Spinner spTinh,
-            spXa,
-            spHuyen,
-            spStatus,
-            spTinhNguyenVien,
-            spCuuHo;
-    private EditText edtName, edtLocation, edtPhone;
+    protected Spinner spCuuHo;
 
     @Override
     protected int getLayoutId() {
@@ -57,161 +50,83 @@ public class FmHoDanCreate extends FmBase {
         setHasOptionsMenu(true);
     }
 
-    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = super.onCreateView(inflater, container, savedInstanceState);
-        spTinh = root.findViewById(R.id.spTinh);
-        spHuyen = root.findViewById(R.id.spHuyen);
-        spXa = root.findViewById(R.id.spXa);
-        spStatus = root.findViewById(R.id.spStatus);
-        spTinhNguyenVien = root.findViewById(R.id.spTinhNguyenVien);
         spCuuHo = root.findViewById(R.id.spCuuHo);
-
-        edtName = root.findViewById(R.id.edtName);
-        edtLocation = root.findViewById(R.id.edtLocation);
-        edtPhone = root.findViewById(R.id.edtPhone);
-
-        spStatus.setOnItemSelectedListener(new SpinnerSelectedCallback(this::setStatus));
-        spTinh.setOnItemSelectedListener(new SpinnerSelectedCallback(this::setTinh));
-        spHuyen.setOnItemSelectedListener(new SpinnerSelectedCallback(this::setHuyen));
-        spXa.setOnItemSelectedListener(new SpinnerSelectedCallback(this::setXa));
-        spTinhNguyenVien.setOnItemSelectedListener(new SpinnerSelectedCallback(this::setTinhNguyenVien));
         spCuuHo.setOnItemSelectedListener(new SpinnerSelectedCallback(this::setCuuHo));
-
         return root;
     }
 
-    private void submitForm() {
-        if (validate()) {
-            getFormHoDan().setName(edtName.getText().toString());
-            getFormHoDan().setLocation(edtLocation.getText().toString());
-            getFormHoDan().setPhone(edtPhone.getText().toString());
-            onFormSubmit();
-        }
+    @Override
+    protected void onFormSubmit() {
+        getForm().setName(edtName.getText().toString());
+        getForm().setLocation(edtLocation.getText().toString());
+        getForm().setPhone(edtPhone.getText().toString());
+        performSubmit();
     }
 
-    protected void onFormSubmit() {
-        ProviderVM.getHoDanVM().create(getFormHoDan());
+    protected void performSubmit() {
+        ProviderVM.getHoDanVM().create(getForm());
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.itSubmit:
-                submitForm();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
+    protected String[] getStatusList() {
+        return HODAN_STATUS_LIST;
     }
 
-    private boolean validate() {
-        boolean formValid = true;
-        formValid = notBlank(edtName);
-        formValid &= notBlank(edtLocation);
-        return formValid;
+    @Override
+    protected void setStatus(int id) {
+        getForm().setStatus(id);
     }
 
-    private boolean notBlank(EditText editText){
-        if (editText.getText().toString().isEmpty()){
-            editText.setError("Not blank!");
-            return false;
-        }
-        return true;
+    @Override
+    protected void setCuuHoId(Integer id) {
+        getForm().setCuuho(id);
     }
 
-    private void setStatus(int position) {
-        getFormHoDan().setStatus(position);
+    @Override
+    protected void setTinhNguyenVienId(Integer id) {
+        getForm().setVolunteer(id);
     }
 
-    private void setCuuHo(int position) {
-        if (position < 1){
-            getFormHoDan().setCuuho(null);
-        } else {
-            CuuHo cuuHo = ProviderVM.getCuuHoVM()
-                    .watchListCuuHo().getValue().get(position - 1);
-            getFormHoDan().setCuuho(cuuHo.getId());
-        }
+    @Override
+    protected void setTinhId(Integer id) {
+        getForm().setTinh(id);
     }
 
-    private void setTinhNguyenVien(int position) {
-        if (position < 1){
-            getFormHoDan().setVolunteer(null);
-        } else {
-            TinhNguyenVien tinhNguyenVien = ProviderVM.getTinhNguyenVienVM()
-                    .watchListTinhNguyenVien().getValue().get(position - 1);
-            getFormHoDan().setVolunteer(tinhNguyenVien.getId());
-        }
+    @Override
+    protected void setHuyenId(Integer id) {
+        getForm().setHuyen(id);
     }
 
-    private void setTinh(int position) {
-        if (position < 1){
-            getFormHoDan().setTinh(null);
-        } else {
-            Tinh tinh = ProviderVM.getTinhVM()
-                    .watchListTinh().getValue().get(position - 1);
-            getFormHoDan().setTinh(tinh.getId());
-        }
+    @Override
+    protected void setXaId(Integer id) {
+        getForm().setXa(id);
     }
 
-    private void setHuyen(int position) {
-        if (position < 1){
-            getFormHoDan().setHuyen(null);
-        } else {
-            Huyen huyen = ProviderVM.getHuyenVM()
-                    .watchListHuyen().getValue().get(position - 1);
-            getFormHoDan().setHuyen(huyen.getId());
-        }
-    }
-
-    private void setXa(int position) {
-        if (position < 1){
-            getFormHoDan().setXa(null);
-        } else {
-            Xa xa = ProviderVM.getXaVM()
-                    .watchListXa().getValue().get(position - 1);
-            getFormHoDan().setXa(xa.getId());
-        }
-    }
-
-    public HoDan getFormHoDan(){
-        return ProviderVM.getHoDanVM().getFormHoDan();
+    public HoDan getForm(){
+        return ProviderVM.getHoDanVM().getForm();
     }
 
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        ProviderVM.getTinhVM().watchListTinh()
-                .observe(getViewLifecycleOwner(), getListTinhWatcher());
-
-        ProviderVM.getHuyenVM().watchListHuyen()
-                .observe(getViewLifecycleOwner(), getListHuyenWatcher());
-
-        ProviderVM.getXaVM().watchListXa()
-                .observe(getViewLifecycleOwner(), getListXaWatcher());
-
-        ProviderVM.getTinhNguyenVienVM().watchListTinhNguyenVien()
-                .observe(getViewLifecycleOwner(), getTNVListWatcher());
-
+        ProviderVM.getHoDanVM().watchForm()
+                .observe(getViewLifecycleOwner(), getFormWatcher());
         ProviderVM.getCuuHoVM().watchListCuuHo()
                 .observe(getViewLifecycleOwner(), getCuuHoListWatcher());
 
-        ProviderVM.getHoDanVM().watchFormHoDan()
-                .observe(getViewLifecycleOwner(), getFormHoDanWatcher());
-
-        ProviderVM.getHoDanVM().watchEvent()
-                .observe(getViewLifecycleOwner(), getEventWatcher());
-
-        ProviderVM.getTinhVM().loadAllTinh();
-        ProviderVM.getHuyenVM().loadAllHuyen();
-        ProviderVM.getXaVM().loadAllXa();
-        ProviderVM.getTinhNguyenVienVM().loadAllTinhNuyenVien();
         ProviderVM.getCuuHoVM().loadAllCuuHo();
-
-        attachArrayToSpinner(spStatus, HODAN_STATUS_LIST);
     }
 
+    private Observer<? super List<CuuHo>> getCuuHoListWatcher() {
+        return list -> {
+            attachArrayToSpinner(spCuuHo, toStringArray(list));
+        };
+    }
+
+    @Override
     protected Observer<? super Event> getEventWatcher() {
         return event -> {
             if (event.getType().equals(Constant.EVENT_TYPE.CREATE_HODAN)){
@@ -231,69 +146,12 @@ public class FmHoDanCreate extends FmBase {
         };
     }
 
-    private Observer<? super HoDan> getFormHoDanWatcher() {
-        return hodan -> {
-            edtName.setText(hodan.getName());
-            edtLocation.setText(hodan.getLocation());
-            edtPhone.setText(hodan.getPhone());
+    private Observer<? super HoDan> getFormWatcher() {
+        return form -> {
+            edtName.setText(form.getName());
+            edtLocation.setText(form.getLocation());
+            edtPhone.setText(form.getPhone());
         };
     }
-
-    private Observer<? super List<CuuHo>> getCuuHoListWatcher() {
-        return list -> {
-            attachArrayToSpinner(spCuuHo, toStringArray(list));
-        };
-    }
-
-    private Observer<? super List<TinhNguyenVien>> getTNVListWatcher() {
-        return list -> {
-            attachArrayToSpinner(spTinhNguyenVien, toStringArray(list));
-        };
-    }
-
-    private Observer<? super List<Xa>> getListXaWatcher() {
-        return list -> {
-            attachArrayToSpinner(spXa, toStringArray(list));
-        };
-    }
-
-    private Observer<? super List<Huyen>> getListHuyenWatcher() {
-        return list -> {
-            attachArrayToSpinner(spHuyen, toStringArray(list));
-        };
-    }
-
-    private Observer<? super List<Tinh>> getListTinhWatcher() {
-        return list -> {
-            attachArrayToSpinner(spTinh, toStringArray(list));
-        };
-    }
-
-    private String[] toStringArray(List list) {
-        String[] names = new String[list.size() + 1];
-        names[0] = "Chưa biết";
-        int i = 1;
-        for (Object item: list){
-            names[i] = item.toString();
-            i++;
-        }
-        return names;
-    }
-
-    public void attachArrayToSpinner(Spinner spinner, String[] array) {
-        ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(array));
-        ArrayAdapter<String> lAdapter = new ArrayAdapter<String>(getContext(),
-                android.R.layout.simple_spinner_dropdown_item,
-                arrayList
-        );
-        spinner.setAdapter(lAdapter);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_hodan_create, menu);
-    }
-
 
 }

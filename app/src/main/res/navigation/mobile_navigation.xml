@@ -19,7 +19,14 @@
     <fragment
         android:id="@+id/fmCuuHo"
         android:name="com.hamatim.cuuhomientrung.ui.fragment.FmCuuHo"
-        android:label="FmCuuHo" />
+        android:label="FmCuuHo" >
+        <action
+            android:id="@+id/action_fmCuuHo_to_fmCuuHoCreate"
+            app:destination="@id/fmCuuHoCreate" />
+        <action
+            android:id="@+id/action_fmCuuHo_to_fmCuuHoEdit"
+            app:destination="@id/fmCuuHoEdit2" />
+    </fragment>
     <fragment
         android:id="@+id/fmTinhNguyenVien"
         android:name="com.hamatim.cuuhomientrung.ui.fragment.FmTinhNguyenVien"
@@ -32,4 +39,12 @@
         android:id="@+id/fmHoDanEdit"
         android:name="com.hamatim.cuuhomientrung.ui.fragment.FmHoDanEdit"
         android:label="FmHoDanEdit" />
+    <fragment
+        android:id="@+id/fmCuuHoCreate"
+        android:name="com.hamatim.cuuhomientrung.ui.fragment.FmCuuHoCreate"
+        android:label="FmCuuHoCreate" />
+    <fragment
+        android:id="@+id/fmCuuHoEdit2"
+        android:name="com.hamatim.cuuhomientrung.ui.fragment.FmCuuHoEdit"
+        android:label="FmCuuHoEdit" />
 </navigation>

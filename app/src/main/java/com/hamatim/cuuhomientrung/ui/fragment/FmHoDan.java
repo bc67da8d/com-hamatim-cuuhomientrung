@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.hamatim.cuuhomientrung.R;
+import com.hamatim.cuuhomientrung.callback.ViewCallBack;
 import com.hamatim.cuuhomientrung.model.HoDan;
 import com.hamatim.cuuhomientrung.provider.ProviderVM;
 import com.hamatim.cuuhomientrung.ui.adapter.AdapterHoDan;
@@ -23,7 +25,7 @@ import com.hamatim.cuuhomientrung.util.TimeComparator;
 import java.sql.Time;
 import java.util.List;
 
-public class FmHoDan extends FmBaseList<HoDan, AdapterHoDan> {
+public class FmHoDan extends FmBaseList<HoDan, AdapterHoDan> implements ViewCallBack<HoDan> {
 
     SwipeRefreshLayout swpLayout;
     FloatingActionButton fabCreateHoDan;
@@ -40,7 +42,9 @@ public class FmHoDan extends FmBaseList<HoDan, AdapterHoDan> {
 
     @Override
     protected AdapterHoDan onCreateAdapter(Context context) {
-        return new AdapterHoDan(context);
+        AdapterHoDan adapterHoDan = new AdapterHoDan(context);
+        adapterHoDan.setViewCallBack(this);
+        return adapterHoDan;
     }
 
     @Override
@@ -51,6 +55,10 @@ public class FmHoDan extends FmBaseList<HoDan, AdapterHoDan> {
         swpLayout.setOnRefreshListener(() -> ProviderVM.getHoDanVM().loadAllHoDan());
         fabCreateHoDan.setOnClickListener(onClick -> navToCreateHoDan());
         return root;
+    }
+
+    private void navToEditHoDan() {
+
     }
 
     private void navToCreateHoDan() {
@@ -75,5 +83,10 @@ public class FmHoDan extends FmBaseList<HoDan, AdapterHoDan> {
             getAdapter().doSort(TimeComparator.getDesc());
             getAdapter().notifyDataSetChanged();
         };
+    }
+
+    @Override
+    public void callback(View view, HoDan data) {
+        showToast(data.getName());
     }
 }

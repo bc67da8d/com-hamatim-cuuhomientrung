@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 
 import com.hamatim.cuuhomientrung.R;
+import com.hamatim.cuuhomientrung.callback.ViewCallBack;
 import com.hamatim.cuuhomientrung.model.HoDan;
 import com.hamatim.cuuhomientrung.ui.viewholder.VHHoDan;
 import com.hamatim.cuuhomientrung.util.TimeComparator;
@@ -15,13 +16,17 @@ import java.util.Comparator;
 
 public class AdapterHoDan extends AdapterBase<HoDan, VHHoDan> {
 
+    private ViewCallBack<HoDan> viewCallBack;
+
     public AdapterHoDan(Context mContext) {
         super(mContext);
     }
 
     @Override
     protected VHHoDan onCreateViewHolder(View root) {
-        return new VHHoDan(root);
+        VHHoDan vhHoDan = new VHHoDan(root);
+        vhHoDan.setCallBack(getViewCallBack());
+        return vhHoDan;
     }
 
     @Override
@@ -36,6 +41,14 @@ public class AdapterHoDan extends AdapterBase<HoDan, VHHoDan> {
 
     public void doSort(Comparator<TimeComparator.TimeShortable> comparable){
         Collections.sort(getmList(), comparable);
+    }
+
+    public ViewCallBack<HoDan> getViewCallBack() {
+        return viewCallBack;
+    }
+
+    public void setViewCallBack(ViewCallBack<HoDan> viewCallBack) {
+        this.viewCallBack = viewCallBack;
     }
 
 }

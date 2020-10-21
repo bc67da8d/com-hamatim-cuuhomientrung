@@ -6,6 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import static com.hamatim.cuuhomientrung.util.Constant.BASE_URL;
+import static com.hamatim.cuuhomientrung.util.Tls12SocketFactory.enableAllTLS;
 
 public class ProviderAPI {
 
@@ -51,7 +52,7 @@ public class ProviderAPI {
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(logging);  // <-- this is the important line!
-//        enableAllTLS(httpClient);
+        enableAllTLS(httpClient);
         return httpClient.build();
     }
 

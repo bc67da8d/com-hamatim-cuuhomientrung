@@ -11,4 +11,15 @@ public class Constant {
             "Đã được cứu",
             "Gặp nạn"
     };
+
+    public static enum STATE {
+        SUCCESS,
+        FAIL,
+        UNKNOWN
+    }
+
+    public enum EVENT_TYPE {
+        CREATE_HODAN,
+        UNKNOWN
+    }
 }

@@ -14,6 +14,7 @@ import com.hamatim.cuuhomientrung.util.HelperFormat;
 import com.hamatim.cuuhomientrung.util.TimeComparator;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class VMHoDan extends ViewModel {
 
     private MutableLiveData<List<HoDan>> listHoDanLiveData;
     private MutableLiveData<HoDan> formLiveData;
+    private List<HoDan> originListHoDan;
 
     public VMHoDan() {
         this.listHoDanLiveData = new MutableLiveData<>();
@@ -42,7 +44,10 @@ public class VMHoDan extends ViewModel {
     }
 
     private void sort(List<HoDan> data) {
-        HelperFormat.sort(list -> listHoDanLiveData.postValue(list), data, TimeComparator.getDesc());
+        HelperFormat.sort(list -> {
+            originListHoDan = list;
+            listHoDanLiveData.postValue(list);
+        }, data, TimeComparator.getDesc());
     }
 
     public void create(HoDan formHodan) {
@@ -65,6 +70,25 @@ public class VMHoDan extends ViewModel {
 
     public HoDan getForm(){
         return formLiveData.getValue();
+    }
+
+    public void filterByStatus(int status){
+        if (originListHoDan != null) {
+            if (status != 0) {
+                int filter = status - 1;
+                new Thread(() -> {
+                    List<HoDan> hoDanList = new ArrayList<>();
+                    for (HoDan hoDan : originListHoDan) {
+                        if (hoDan.getStatus() == filter) {
+                            hoDanList.add(hoDan);
+                        }
+                    }
+                    listHoDanLiveData.postValue(hoDanList);
+                }).start();
+            } else {
+                listHoDanLiveData.postValue(originListHoDan);
+            }
+        }
     }
 
 }

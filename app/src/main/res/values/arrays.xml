@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="hodan_filter">
+        <item>Tất cả</item>
+        <item>Chưa xác minh</item>
+        <item>Cần ứng cứu gấp</item>
+        <item>Không gọi được</item>
+        <item>Đã được cứu</item>
+        <item>Gặp nạn</item>
+    </string-array>
+</resources>

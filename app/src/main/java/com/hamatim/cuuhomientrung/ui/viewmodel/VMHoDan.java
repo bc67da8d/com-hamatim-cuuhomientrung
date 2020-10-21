@@ -9,7 +9,11 @@ import com.hamatim.cuuhomientrung.model.Event;
 import com.hamatim.cuuhomientrung.model.HoDan;
 import com.hamatim.cuuhomientrung.provider.ProviderSingleton;
 import com.hamatim.cuuhomientrung.repository.RepoHoDan;
+import com.hamatim.cuuhomientrung.util.HelperFormat;
+import com.hamatim.cuuhomientrung.util.TimeComparator;
 
+import java.sql.Time;
+import java.util.Collections;
 import java.util.List;
 
 public class VMHoDan extends ViewModel {
@@ -39,10 +43,11 @@ public class VMHoDan extends ViewModel {
     }
 
     public void loadAllHoDan(){
-        ProviderSingleton.get(RepoHoDan.class)
-                .all(data -> {
-                    listHoDanLiveData.postValue(data);
-                });
+        ProviderSingleton.get(RepoHoDan.class).all(this::sort);
+    }
+
+    private void sort(List<HoDan> data) {
+        HelperFormat.sort(list -> listHoDanLiveData.postValue(list), data, TimeComparator.getDesc());
     }
 
     public void create(HoDan formHodan) {

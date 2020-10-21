@@ -34,8 +34,4 @@ public class AdapterCuuHo extends AdapterBase<CuuHo, VHCuuHo> {
         holder.setModel(getItem(position));
     }
 
-    public void doSort(Comparator<TimeComparator.TimeShortable> comparable){
-        Collections.sort(getmList(), comparable);
-    }
-
 }

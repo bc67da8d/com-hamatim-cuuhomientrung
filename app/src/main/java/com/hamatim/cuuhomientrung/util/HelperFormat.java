@@ -4,9 +4,14 @@ import android.content.res.Resources;
 
 import com.hamatim.cuuhomientrung.MainApplication;
 import com.hamatim.cuuhomientrung.R;
+import com.hamatim.cuuhomientrung.callback.CallBack;
 
 import org.joda.time.DateTime;
 import org.joda.time.Instant;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class HelperFormat {
 
@@ -77,6 +82,13 @@ public class HelperFormat {
 
     private static Resources getRes(){
         return MainApplication.getInstance().getResources();
+    }
+
+    public static <T> void sort(CallBack<List<T>> callBack,  List<T> list, Comparator<? super T> comparator){
+        new Thread(() -> {
+            Collections.sort(list, comparator);
+            callBack.callback(list);
+        }).start();
     }
 
 }

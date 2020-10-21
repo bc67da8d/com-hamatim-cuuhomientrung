@@ -86,7 +86,6 @@ public class FmHoDan extends FmBaseList<HoDan, AdapterHoDan> implements ViewCall
         return list -> {
             swpLayout.setRefreshing(false);
             getAdapter().setmList(list);
-            getAdapter().doSort(TimeComparator.getDesc());
             getAdapter().notifyDataSetChanged();
         };
     }

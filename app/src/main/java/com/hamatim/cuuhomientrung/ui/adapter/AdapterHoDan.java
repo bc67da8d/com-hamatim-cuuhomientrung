@@ -39,10 +39,6 @@ public class AdapterHoDan extends AdapterBase<HoDan, VHHoDan> {
         holder.setModel(getItem(position));
     }
 
-    public void doSort(Comparator<TimeComparator.TimeShortable> comparable){
-        Collections.sort(getmList(), comparable);
-    }
-
     public ViewCallBack<HoDan> getViewCallBack() {
         return viewCallBack;
     }

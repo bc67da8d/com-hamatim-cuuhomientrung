@@ -60,7 +60,6 @@ public class FmCuuHo extends FmBaseList<CuuHo, AdapterCuuHo> {
         return list -> {
             swpLayout.setRefreshing(false);
             getAdapter().setmList(list);
-            getAdapter().doSort(TimeComparator.getDesc());
             getAdapter().notifyDataSetChanged();
         };
     }

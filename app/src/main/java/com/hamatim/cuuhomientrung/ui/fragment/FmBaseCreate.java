@@ -40,6 +40,13 @@ public abstract class FmBaseCreate extends FmBase {
             spTinhNguyenVien;
     protected EditText edtName, edtLocation, edtPhone;
 
+    private int currentStatusIndex,
+            currentTinhIndex,
+            currentHuyenIndex,
+            currentXaIndex,
+            currentTinhNguyenVienIndex,
+            currentCuuHoIndex;
+
     protected abstract void setStatus(int position);
     protected abstract void setCuuHoId(Integer id);
     protected abstract void setTinhNguyenVienId(Integer id);
@@ -183,7 +190,6 @@ public abstract class FmBaseCreate extends FmBase {
         ProviderVM.getHoDanVM().watchEvent()
                 .observe(getViewLifecycleOwner(), getEventWatcher());
 
-        attachArrayToSpinner(spStatus, getStatusList());
     }
 
     protected void loadData(){
@@ -191,50 +197,56 @@ public abstract class FmBaseCreate extends FmBase {
         ProviderVM.getHuyenVM().loadAllHuyen();
         ProviderVM.getXaVM().loadAllXa();
         ProviderVM.getTinhNguyenVienVM().loadAllTinhNuyenVien();
+        attachArrayToSpinner(spStatus, getCurrentStatus(), getStatusList());
     }
 
     private Observer<? super List<TinhNguyenVien>> getTNVListWatcher() {
         return list -> {
-            attachArrayToSpinner(spTinhNguyenVien, toStringArray(list));
+            attachListToSpinner(spTinhNguyenVien, getCurrentTinhNguyenVienId(), list);
         };
     }
 
     private Observer<? super List<Xa>> getListXaWatcher() {
         return list -> {
-            attachArrayToSpinner(spXa, toStringArray(list));
+            attachListToSpinner(spXa, getCurrentXaId(), list);
         };
     }
 
     private Observer<? super List<Huyen>> getListHuyenWatcher() {
         return list -> {
-            attachArrayToSpinner(spHuyen, toStringArray(list));
+            attachListToSpinner(spHuyen, getCurrentHuyenId(), list);
         };
     }
 
     private Observer<? super List<Tinh>> getListTinhWatcher() {
         return list -> {
-            attachArrayToSpinner(spTinh, toStringArray(list));
+            attachListToSpinner(spTinh, getCurrentTinhId(), list);
         };
     }
 
-    protected String[] toStringArray(List<? extends Base> list) {
+    public void attachListToSpinner(Spinner spinner, int currentValue, List<? extends Base> list) {
+        int currentIndex = 0;
         String[] names = new String[list.size() + 1];
         names[0] = "Chưa biết";
         int i = 1;
-        for (Object item: list){
+        for (Base item: list){
             names[i] = item.toString();
+            if (currentValue == item.getId()) {
+                currentIndex = i;
+            }
             i++;
         }
-        return names;
+        attachArrayToSpinner(spinner, currentIndex, names);
     }
 
-    public void attachArrayToSpinner(Spinner spinner, String[] array) {
+    public void attachArrayToSpinner(Spinner spinner, int defaultIndex, String[] array) {
         ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(array));
         ArrayAdapter<String> lAdapter = new ArrayAdapter<String>(getContext(),
                 android.R.layout.simple_spinner_dropdown_item,
                 arrayList
         );
         spinner.setAdapter(lAdapter);
+        spinner.setSelection(defaultIndex);
     }
 
     @Override
@@ -243,5 +255,11 @@ public abstract class FmBaseCreate extends FmBase {
         inflater.inflate(R.menu.menu_hodan_create, menu);
     }
 
+    protected int mayNull(Integer integer){
+        if (integer == null){
+            return 0;
+        }
+        return integer;
+    }
 
 }

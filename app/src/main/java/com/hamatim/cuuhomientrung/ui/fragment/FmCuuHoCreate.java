@@ -111,7 +111,7 @@ public class FmCuuHoCreate extends FmBaseCreate {
 
     @Override
     protected int getCurrentStatus() {
-        return 0;
+        return mayNull(getForm().getStatus());
     }
 
     @Override
@@ -121,22 +121,22 @@ public class FmCuuHoCreate extends FmBaseCreate {
 
     @Override
     protected int getCurrentTinhNguyenVienId() {
-        return 0;
+        return mayNull(getForm().getVolunteer());
     }
 
     @Override
     protected int getCurrentTinhId() {
-        return 0;
+        return mayNull(getForm().getTinh());
     }
 
     @Override
     protected int getCurrentHuyenId() {
-        return 0;
+        return mayNull(getForm().getHuyen());
     }
 
     @Override
     protected int getCurrentXaId() {
-        return 0;
+        return mayNull(getForm().getXa());
     }
 
     @Override

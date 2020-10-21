@@ -2,37 +2,20 @@ package com.hamatim.cuuhomientrung.ui.fragment;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.text.Editable;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
-
 import com.hamatim.cuuhomientrung.R;
 import com.hamatim.cuuhomientrung.callback.SpinnerSelectedCallback;
 import com.hamatim.cuuhomientrung.model.CuuHo;
 import com.hamatim.cuuhomientrung.model.Event;
 import com.hamatim.cuuhomientrung.model.HoDan;
-import com.hamatim.cuuhomientrung.model.Huyen;
-import com.hamatim.cuuhomientrung.model.Tinh;
-import com.hamatim.cuuhomientrung.model.TinhNguyenVien;
-import com.hamatim.cuuhomientrung.model.Xa;
 import com.hamatim.cuuhomientrung.provider.ProviderVM;
 import com.hamatim.cuuhomientrung.util.Constant;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.hamatim.cuuhomientrung.util.Constant.HODAN_STATUS_LIST;
@@ -76,32 +59,32 @@ public class FmHoDanCreate extends FmBaseCreate {
 
     @Override
     protected int getCurrentStatus() {
-        return 0;
+        return mayNull(getForm().getStatus());
     }
 
     @Override
     protected int getCurrentCuuHoId() {
-        return 0;
+        return mayNull(getForm().getCuuho());
     }
 
     @Override
     protected int getCurrentTinhNguyenVienId() {
-        return 0;
+        return mayNull(getForm().getVolunteer());
     }
 
     @Override
     protected int getCurrentTinhId() {
-        return 0;
+        return mayNull(getForm().getTinh());
     }
 
     @Override
     protected int getCurrentHuyenId() {
-        return 0;
+        return mayNull(getForm().getHuyen());
     }
 
     @Override
     protected int getCurrentXaId() {
-        return 0;
+        return mayNull(getForm().getXa());
     }
 
     @Override
@@ -156,7 +139,7 @@ public class FmHoDanCreate extends FmBaseCreate {
 
     private Observer<? super List<CuuHo>> getCuuHoListWatcher() {
         return list -> {
-            attachArrayToSpinner(spCuuHo, toStringArray(list));
+            attachListToSpinner(spCuuHo, getCurrentCuuHoId(), list);
         };
     }
 

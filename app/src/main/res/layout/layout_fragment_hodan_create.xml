@@ -123,9 +123,9 @@
                 android:id="@+id/edtNote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="1dp"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:gravity="start|top"
+                android:inputType="textMultiLine" />
 
             <TextView
                 android:id="@+id/textView9"

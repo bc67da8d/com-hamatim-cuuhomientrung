@@ -88,29 +88,53 @@ public class FmHoDanCreate extends FmBase {
     }
 
     private void setCuuHo(int position) {
-        CuuHo cuuHo = ProviderVM.getCuuHoVM().watchListCuuHo().getValue().get(position);
-        getFormHodan().setCuuho(cuuHo.getId());
+        if (position < 1){
+            getFormHodan().setCuuho(null);
+        } else {
+            CuuHo cuuHo = ProviderVM.getCuuHoVM()
+                    .watchListCuuHo().getValue().get(position - 1);
+            getFormHodan().setCuuho(cuuHo.getId());
+        }
     }
 
     private void setTinhNguyenVien(int position) {
-        TinhNguyenVien tinhNguyenVien = ProviderVM.getTinhNguyenVienVM().watchListTinhNguyenVien()
-                .getValue().get(position);
-        getFormHodan().setVolunteer(tinhNguyenVien.getId());
+        if (position < 1){
+            getFormHodan().setVolunteer(null);
+        } else {
+            TinhNguyenVien tinhNguyenVien = ProviderVM.getTinhNguyenVienVM()
+                    .watchListTinhNguyenVien().getValue().get(position - 1);
+            getFormHodan().setVolunteer(tinhNguyenVien.getId());
+        }
     }
 
     private void setTinh(int position) {
-        Tinh tinh = ProviderVM.getTinhVM().watchListTinh().getValue().get(position);
-        getFormHodan().setTinh(tinh.getId());
+        if (position < 1){
+            getFormHodan().setTinh(null);
+        } else {
+            Tinh tinh = ProviderVM.getTinhVM()
+                    .watchListTinh().getValue().get(position - 1);
+            getFormHodan().setTinh(tinh.getId());
+        }
     }
 
     private void setHuyen(int position) {
-        Huyen huyen = ProviderVM.getHuyenVM().watchListHuyen().getValue().get(position);
-        getFormHodan().setHuyen(huyen.getId());
+        if (position < 1){
+            getFormHodan().setHuyen(null);
+        } else {
+            Huyen huyen = ProviderVM.getHuyenVM()
+                    .watchListHuyen().getValue().get(position - 1);
+            getFormHodan().setHuyen(huyen.getId());
+        }
     }
 
     private void setXa(int position) {
-        Xa xa = ProviderVM.getXaVM().watchListXa().getValue().get(position);
-        getFormHodan().setXa(xa.getId());
+        if (position < 1){
+            getFormHodan().setXa(null);
+        } else {
+            Xa xa = ProviderVM.getXaVM()
+                    .watchListXa().getValue().get(position - 1);
+            getFormHodan().setXa(xa.getId());
+        }
     }
 
 
@@ -157,7 +181,8 @@ public class FmHoDanCreate extends FmBase {
     private Observer<? super List<Xa>> getListXaWatcher() {
         return list -> {
             attachArrayToSpinner(spXa, toStringArray(list));
-        };    }
+        };
+    }
 
     private Observer<? super List<Huyen>> getListHuyenWatcher() {
         return list -> {
@@ -172,8 +197,9 @@ public class FmHoDanCreate extends FmBase {
     }
 
     private String[] toStringArray(List list) {
-        String[] names = new String[list.size()];
-        int i = 0;
+        String[] names = new String[list.size() + 1];
+        names[0] = "Chưa biết";
+        int i = 1;
         for (Object item: list){
             names[i] = item.toString();
             i++;

@@ -8,15 +8,15 @@ android {
         applicationId "com.bc67da8d.cuuhomientrung"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 10
+        versionName "cuuhomientrung.21-10-20.V1.0"
         setProperty("archivesBaseName", versionName + "-code-" + versionCode)
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

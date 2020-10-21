@@ -212,7 +212,7 @@ public class FmHoDanCreate extends FmBase {
         attachArrayToSpinner(spStatus, HODAN_STATUS_LIST);
     }
 
-    private Observer<? super Event> getEventWatcher() {
+    protected Observer<? super Event> getEventWatcher() {
         return event -> {
             if (event.getType().equals(Constant.EVENT_TYPE.CREATE_HODAN)){
                 if (event.isFailed()) {

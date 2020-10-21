@@ -3,6 +3,9 @@ package com.hamatim.cuuhomientrung.ui.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -28,7 +31,6 @@ import java.util.List;
 public class FmHoDan extends FmBaseList<HoDan, AdapterHoDan> implements ViewCallBack<HoDan> {
 
     SwipeRefreshLayout swpLayout;
-    FloatingActionButton fabCreateHoDan;
 
     @Override
     protected int getLayoutId() {
@@ -38,6 +40,10 @@ public class FmHoDan extends FmBaseList<HoDan, AdapterHoDan> implements ViewCall
     @Override
     protected int getListViewId() {
         return R.id.rcvRoot;
+    }
+
+    public FmHoDan() {
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -51,9 +57,7 @@ public class FmHoDan extends FmBaseList<HoDan, AdapterHoDan> implements ViewCall
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = super.onCreateView(inflater, container, savedInstanceState);
         swpLayout = root.findViewById(R.id.swpLayout);
-        fabCreateHoDan = root.findViewById(R.id.fabCreateHoDan);
         swpLayout.setOnRefreshListener(() -> ProviderVM.getHoDanVM().loadAllHoDan());
-        fabCreateHoDan.setOnClickListener(onClick -> navToCreateHoDan());
         return root;
     }
 
@@ -94,5 +98,21 @@ public class FmHoDan extends FmBaseList<HoDan, AdapterHoDan> implements ViewCall
     public void callback(View view, HoDan data) {
         showToast(data.getName());
         navToEditHoDan(data);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menuCreate:
+                navToCreateHoDan();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_hodan_list, menu);
     }
 }

@@ -1,5 +1,7 @@
 package com.hamatim.cuuhomientrung.ui.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +30,14 @@ public abstract class FmBase extends Fragment {
 
     protected void showToast(String message){
         Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    protected void showAlert(String title, String message){
+        new AlertDialog.Builder(getContext())
+                .setTitle("Update Ho Dan Alert!")
+                .setMessage(message)
+                .setPositiveButton("Close", (dialogInterface, i) -> dialogInterface.dismiss())
+                .show();
     }
 
 }

@@ -29,4 +29,10 @@ public class VMHoDan extends ViewModel {
                 });
     }
 
+    public void create(HoDan formHodan) {
+        ProviderSingleton.get(RepoHoDan.class)
+                .create(data -> {
+
+                }, formHodan);
+    }
 }

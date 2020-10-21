@@ -14,7 +14,7 @@ import retrofit2.http.POST;
 
 public interface EndpointHoDan {
 
-    @GET("hodan")
+    @GET("hodan/")
     @Headers({"Content-Type: application/json"})
     Call<List<HoDan>> all();
 
@@ -22,7 +22,7 @@ public interface EndpointHoDan {
     @Headers({"Content-Type: application/json"})
     Call<HoDan> get(int id);
 
-    @POST("hodan")
+    @POST("hodan/")
     @Headers({"Content-Type: application/json"})
     Call<HoDan> create(@Body HoDan model);
 

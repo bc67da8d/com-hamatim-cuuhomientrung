@@ -6,7 +6,10 @@ import androidx.lifecycle.ViewModelProvider;
 import com.hamatim.cuuhomientrung.MainApplication;
 import com.hamatim.cuuhomientrung.ui.viewmodel.VMCuuHo;
 import com.hamatim.cuuhomientrung.ui.viewmodel.VMHoDan;
+import com.hamatim.cuuhomientrung.ui.viewmodel.VMHuyen;
+import com.hamatim.cuuhomientrung.ui.viewmodel.VMTinh;
 import com.hamatim.cuuhomientrung.ui.viewmodel.VMTinhNguyenVien;
+import com.hamatim.cuuhomientrung.ui.viewmodel.VMXa;
 
 import java.util.HashMap;
 
@@ -44,6 +47,18 @@ public class ProviderVM {
 
     public static VMCuuHo getCuuHoVM(){
         return get(VMCuuHo.class);
+    }
+
+    public static VMTinh getTinhVM(){
+        return get(VMTinh.class);
+    }
+
+    public static VMHuyen getHuyenVM(){
+        return get(VMHuyen.class);
+    }
+
+    public static VMXa getXaVM(){
+        return get(VMXa.class);
     }
 
     public static VMHoDan getHoDanVM(){

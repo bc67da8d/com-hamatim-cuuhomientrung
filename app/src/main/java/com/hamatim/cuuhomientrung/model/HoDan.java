@@ -1,5 +1,7 @@
 package com.hamatim.cuuhomientrung.model;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.hamatim.cuuhomientrung.util.TimeComparator;
@@ -154,4 +156,11 @@ public class HoDan implements TimeComparator.TimeShortable {
     public String getTime() {
         return getUpdateTime();
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return getName();
+    }
+
 }

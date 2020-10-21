@@ -14,7 +14,7 @@ import retrofit2.http.POST;
 
 public interface EndpointTinhNguyenVien {
 
-    @GET("tinhnguyenvien")
+    @GET("tinhnguyenvien/")
     @Headers({"Content-Type: application/json"})
     Call<List<TinhNguyenVien>> all();
 

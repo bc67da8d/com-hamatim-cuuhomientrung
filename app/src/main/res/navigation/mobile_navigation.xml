@@ -8,7 +8,11 @@
     <fragment
         android:id="@+id/fmHoDan"
         android:name="com.hamatim.cuuhomientrung.ui.fragment.FmHoDan"
-        android:label="FmHoDan" />
+        android:label="FmHoDan" >
+        <action
+            android:id="@+id/action_fmHoDan_to_fmHoDanCreate"
+            app:destination="@id/fmHoDanCreate" />
+    </fragment>
     <fragment
         android:id="@+id/fmCuuHo"
         android:name="com.hamatim.cuuhomientrung.ui.fragment.FmCuuHo"
@@ -17,4 +21,8 @@
         android:id="@+id/fmTinhNguyenVien"
         android:name="com.hamatim.cuuhomientrung.ui.fragment.FmTinhNguyenVien"
         android:label="FmTinhNguyenVien" />
+    <fragment
+        android:id="@+id/fmHoDanCreate"
+        android:name="com.hamatim.cuuhomientrung.ui.fragment.FmHoDanCreate"
+        android:label="FmHoDanCreate" />
 </navigation>

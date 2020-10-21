@@ -7,5 +7,6 @@ import java.util.List;
 public interface IRepoHoDan {
 
     void all(CallBack<List<HoDan>> callBack);
+    void create(CallBack<HoDan> callBack, HoDan hoDan);
 
 }

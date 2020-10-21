@@ -14,7 +14,7 @@ import retrofit2.http.POST;
 
 public interface EndpointXa {
 
-    @GET("xa")
+    @GET("xa/")
     @Headers({"Content-Type: application/json"})
     Call<List<Xa>> all();
 

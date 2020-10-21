@@ -86,8 +86,12 @@ public class FmHoDanCreate extends FmBase {
             getFormHoDan().setName(edtName.getText().toString());
             getFormHoDan().setLocation(edtLocation.getText().toString());
             getFormHoDan().setPhone(edtPhone.getText().toString());
-            ProviderVM.getHoDanVM().create(getFormHoDan());
+            onFormSubmit();
         }
+    }
+
+    protected void onFormSubmit() {
+        ProviderVM.getHoDanVM().create(getFormHoDan());
     }
 
     @Override

@@ -52,6 +52,17 @@ public class VMHoDan extends ViewModel {
                 }, formHodan);
     }
 
+    public void update(HoDan formHodan) {
+        ProviderSingleton.get(RepoHoDan.class)
+                .update(data -> {
+                    eventLiveData.postValue(data.getEvent());
+                }, formHodan);
+    }
+
+    public void initFormHoDan(HoDan hoDan){
+        formHoDanLiveData.postValue(hoDan);
+    }
+
     public HoDan getFormHoDan(){
         return formHoDanLiveData.getValue();
     }

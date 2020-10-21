@@ -57,11 +57,17 @@ public class FmHoDan extends FmBaseList<HoDan, AdapterHoDan> implements ViewCall
         return root;
     }
 
-    private void navToEditHoDan() {
-
+    private void navToEditHoDan(HoDan data) {
+        HoDan hoDan = new HoDan();
+        hoDan.clone(data);
+        ProviderVM.getHoDanVM().initFormHoDan(hoDan);
+        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+        navController.navigate(R.id.action_fmHoDan_to_fmHoDanEdit);
     }
 
     private void navToCreateHoDan() {
+        HoDan hoDan = new HoDan();
+        ProviderVM.getHoDanVM().initFormHoDan(hoDan);
         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         navController.navigate(R.id.action_fmHoDan_to_fmHoDanCreate);
     }
@@ -88,5 +94,6 @@ public class FmHoDan extends FmBaseList<HoDan, AdapterHoDan> implements ViewCall
     @Override
     public void callback(View view, HoDan data) {
         showToast(data.getName());
+        navToEditHoDan(data);
     }
 }

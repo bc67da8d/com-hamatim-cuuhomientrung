@@ -18,7 +18,7 @@ public interface EndpointHoDan {
     @Headers({"Content-Type: application/json"})
     Call<List<HoDan>> all();
 
-    @GET("hodan/{id}")
+    @GET("hodan/{id}/")
     @Headers({"Content-Type: application/json"})
     Call<HoDan> get(int id);
 
@@ -26,11 +26,11 @@ public interface EndpointHoDan {
     @Headers({"Content-Type: application/json"})
     Call<HoDan> create(@Body HoDan model);
 
-    @PATCH("hodan/{id}")
+    @PATCH("hodan/{id}/")
     @Headers({"Content-Type: application/json"})
     Call<HoDan> update(int id, @Body HoDan model);
 
-    @DELETE("hodan/{id}")
+    @DELETE("hodan/{id}/")
     @Headers({"Content-Type: application/json"})
     Call<HoDan> delete(int id);
 

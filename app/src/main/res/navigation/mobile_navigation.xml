@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_fmHoDan_to_fmHoDanCreate"
             app:destination="@id/fmHoDanCreate" />
+        <action
+            android:id="@+id/action_fmHoDan_to_fmHoDanEdit"
+            app:destination="@id/fmHoDanEdit" />
     </fragment>
     <fragment
         android:id="@+id/fmCuuHo"
@@ -25,4 +28,8 @@
         android:id="@+id/fmHoDanCreate"
         android:name="com.hamatim.cuuhomientrung.ui.fragment.FmHoDanCreate"
         android:label="FmHoDanCreate" />
+    <fragment
+        android:id="@+id/fmHoDanEdit"
+        android:name="com.hamatim.cuuhomientrung.ui.fragment.FmHoDanEdit"
+        android:label="FmHoDanEdit" />
 </navigation>

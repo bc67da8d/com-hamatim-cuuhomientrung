@@ -20,6 +20,6 @@ public class Constant {
 
     public enum EVENT_TYPE {
         CREATE_HODAN,
-        UNKNOWN
+        UPDATE_HODAN, UNKNOWN
     }
 }

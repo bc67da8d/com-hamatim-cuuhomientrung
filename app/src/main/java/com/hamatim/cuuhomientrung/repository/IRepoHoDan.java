@@ -9,5 +9,6 @@ public interface IRepoHoDan {
 
     void all(CallBack<List<HoDan>> callBack);
     void create(CallBack<DTO<HoDan>> callBack, HoDan hoDan);
+    void update(CallBack<DTO<HoDan>> callBack, HoDan hoDan);
 
 }

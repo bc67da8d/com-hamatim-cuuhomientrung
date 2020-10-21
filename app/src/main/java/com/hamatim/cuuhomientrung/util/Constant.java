@@ -28,6 +28,6 @@ public class Constant {
 
     public enum EVENT_TYPE {
         CREATE_HODAN,
-        UPDATE_HODAN, UNKNOWN
+        UPDATE_HODAN, UPDATE_CUUHO, CREATE_CUUHO, UNKNOWN
     }
 }

@@ -8,6 +8,7 @@ import com.hamatim.cuuhomientrung.model.DTO;
 import com.hamatim.cuuhomientrung.model.Event;
 import com.hamatim.cuuhomientrung.model.HoDan;
 import com.hamatim.cuuhomientrung.provider.ProviderSingleton;
+import com.hamatim.cuuhomientrung.provider.ProviderVM;
 import com.hamatim.cuuhomientrung.repository.RepoHoDan;
 import com.hamatim.cuuhomientrung.util.HelperFormat;
 import com.hamatim.cuuhomientrung.util.TimeComparator;
@@ -20,12 +21,10 @@ public class VMHoDan extends ViewModel {
 
     private MutableLiveData<List<HoDan>> listHoDanLiveData;
     private MutableLiveData<HoDan> formLiveData;
-    private MutableLiveData<Event> eventLiveData;
 
     public VMHoDan() {
         this.listHoDanLiveData = new MutableLiveData<>();
         this.formLiveData = new MutableLiveData<>();
-        this.eventLiveData = new MutableLiveData<>();
         HoDan hoDan = new HoDan();
         formLiveData.setValue(hoDan);
     }
@@ -36,10 +35,6 @@ public class VMHoDan extends ViewModel {
 
     public LiveData<HoDan> watchForm(){
         return formLiveData;
-    }
-
-    public LiveData<Event> watchEvent(){
-        return eventLiveData;
     }
 
     public void loadAllHoDan(){
@@ -53,14 +48,14 @@ public class VMHoDan extends ViewModel {
     public void create(HoDan formHodan) {
         ProviderSingleton.get(RepoHoDan.class)
                 .create(data -> {
-                    eventLiveData.postValue(data.getEvent());
+                    ProviderVM.getEventVM().postEvent(data.getEvent());
                 }, formHodan);
     }
 
     public void update(HoDan formHodan) {
         ProviderSingleton.get(RepoHoDan.class)
                 .update(data -> {
-                    eventLiveData.postValue(data.getEvent());
+                    ProviderVM.getEventVM().postEvent(data.getEvent());
                 }, formHodan);
     }
 
@@ -70,10 +65,6 @@ public class VMHoDan extends ViewModel {
 
     public HoDan getForm(){
         return formLiveData.getValue();
-    }
-
-    public void eventProcessed() {
-        eventLiveData.postValue(new Event());
     }
 
 }

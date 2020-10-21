@@ -158,7 +158,7 @@ public class FmHoDanCreate extends FmBaseCreate {
                             .setMessage("Success!")
                             .show();
                 }
-                ProviderVM.getHoDanVM().eventProcessed();
+                ProviderVM.getEventVM().eventProcessed();
             }
         };
     }

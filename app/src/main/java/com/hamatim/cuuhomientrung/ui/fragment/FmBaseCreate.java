@@ -108,8 +108,8 @@ public abstract class FmBaseCreate extends FmBase {
 
     protected boolean validate() {
         boolean formValid = true;
-        formValid = notBlank(edtName);
-        formValid &= notBlank(edtLocation);
+//        formValid = notBlank(edtName);
+//        formValid &= notBlank(edtLocation);
         return formValid;
     }
 
@@ -187,7 +187,7 @@ public abstract class FmBaseCreate extends FmBase {
         ProviderVM.getTinhNguyenVienVM().watchListTinhNguyenVien()
                 .observe(getViewLifecycleOwner(), getTNVListWatcher());
 
-        ProviderVM.getHoDanVM().watchEvent()
+        ProviderVM.getEventVM().watchEvent()
                 .observe(getViewLifecycleOwner(), getEventWatcher());
 
     }

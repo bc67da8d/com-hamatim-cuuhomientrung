@@ -24,7 +24,7 @@ public class FmHoDanEdit extends FmHoDanCreate {
                 } else {
                     showAlert("Update ho dan alert", "Success");
                 }
-                ProviderVM.getHoDanVM().eventProcessed();
+                ProviderVM.getEventVM().eventProcessed();
             }
         };
     }

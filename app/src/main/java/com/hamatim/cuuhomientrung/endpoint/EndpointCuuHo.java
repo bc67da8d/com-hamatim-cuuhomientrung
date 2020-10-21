@@ -11,6 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface EndpointCuuHo {
 
@@ -18,20 +19,20 @@ public interface EndpointCuuHo {
     @Headers({"Content-Type: application/json"})
     Call<List<CuuHo>> all();
 
-    @GET("cuuho/{id}")
+    @GET("cuuho/{id}/")
     @Headers({"Content-Type: application/json"})
-    Call<CuuHo> get(int id);
+    Call<CuuHo> get(@Path("id") int id);
 
-    @POST("cuuho")
+    @POST("cuuho/")
     @Headers({"Content-Type: application/json"})
     Call<CuuHo> create(@Body CuuHo model);
 
-    @PATCH("cuuho/{id}")
+    @PATCH("cuuho/{id}/")
     @Headers({"Content-Type: application/json"})
-    Call<CuuHo> update(int id, @Body CuuHo model);
+    Call<CuuHo> update(@Path("id") int id, @Body CuuHo model);
 
-    @DELETE("cuuho/{id}")
+    @DELETE("cuuho/{id}/")
     @Headers({"Content-Type: application/json"})
-    Call<CuuHo> delete(int id);
+    Call<CuuHo> delete(@Path("id") int id);
 
 }

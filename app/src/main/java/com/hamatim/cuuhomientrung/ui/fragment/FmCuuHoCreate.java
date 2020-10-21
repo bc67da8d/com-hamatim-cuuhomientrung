@@ -89,6 +89,14 @@ public class FmCuuHoCreate extends FmBaseCreate {
     @Override
     protected Observer<? super Event> getEventWatcher() {
         return event -> {
+            if (event.getType().equals(Constant.EVENT_TYPE.CREATE_CUUHO)){
+                if (event.isFailed()) {
+                    showAlert("Update ho dan alert", event.getMessage());
+                } else {
+                    showAlert("Update ho dan alert", "Success");
+                }
+                ProviderVM.getEventVM().eventProcessed();
+            }
         };
     }
 

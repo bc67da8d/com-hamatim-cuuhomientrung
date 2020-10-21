@@ -7,7 +7,9 @@ import androidx.lifecycle.ViewModel;
 import com.hamatim.cuuhomientrung.model.CuuHo;
 import com.hamatim.cuuhomientrung.model.HoDan;
 import com.hamatim.cuuhomientrung.provider.ProviderSingleton;
+import com.hamatim.cuuhomientrung.provider.ProviderVM;
 import com.hamatim.cuuhomientrung.repository.RepoCuuHo;
+import com.hamatim.cuuhomientrung.repository.RepoHoDan;
 import com.hamatim.cuuhomientrung.util.HelperFormat;
 import com.hamatim.cuuhomientrung.util.TimeComparator;
 
@@ -48,11 +50,17 @@ public class VMCuuHo extends ViewModel {
     }
 
     public void create(CuuHo form) {
-
+        ProviderSingleton.get(RepoCuuHo.class)
+                .create(data -> {
+                    ProviderVM.getEventVM().postEvent(data.getEvent());
+                }, form);
     }
 
     public void update(CuuHo form) {
-
+        ProviderSingleton.get(RepoCuuHo.class)
+                .update(data -> {
+                    ProviderVM.getEventVM().postEvent(data.getEvent());
+                }, form);
     }
 
 }

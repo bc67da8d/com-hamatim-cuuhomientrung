@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.hamatim.cuuhomientrung.MainApplication;
 import com.hamatim.cuuhomientrung.ui.viewmodel.VMCuuHo;
+import com.hamatim.cuuhomientrung.ui.viewmodel.VMEvent;
 import com.hamatim.cuuhomientrung.ui.viewmodel.VMHoDan;
 import com.hamatim.cuuhomientrung.ui.viewmodel.VMHuyen;
 import com.hamatim.cuuhomientrung.ui.viewmodel.VMTinh;
@@ -63,6 +64,10 @@ public class ProviderVM {
 
     public static VMHoDan getHoDanVM(){
         return get(VMHoDan.class);
+    }
+
+    public static VMEvent getEventVM(){
+        return get(VMEvent.class);
     }
 
 }

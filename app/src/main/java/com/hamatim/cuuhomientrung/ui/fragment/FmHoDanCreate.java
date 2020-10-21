@@ -75,6 +75,36 @@ public class FmHoDanCreate extends FmBaseCreate {
     }
 
     @Override
+    protected int getCurrentStatus() {
+        return 0;
+    }
+
+    @Override
+    protected int getCurrentCuuHoId() {
+        return 0;
+    }
+
+    @Override
+    protected int getCurrentTinhNguyenVienId() {
+        return 0;
+    }
+
+    @Override
+    protected int getCurrentTinhId() {
+        return 0;
+    }
+
+    @Override
+    protected int getCurrentHuyenId() {
+        return 0;
+    }
+
+    @Override
+    protected int getCurrentXaId() {
+        return 0;
+    }
+
+    @Override
     protected void setStatus(int id) {
         getForm().setStatus(id);
     }
@@ -116,7 +146,11 @@ public class FmHoDanCreate extends FmBaseCreate {
                 .observe(getViewLifecycleOwner(), getFormWatcher());
         ProviderVM.getCuuHoVM().watchListCuuHo()
                 .observe(getViewLifecycleOwner(), getCuuHoListWatcher());
+    }
 
+    @Override
+    protected void loadData() {
+        super.loadData();
         ProviderVM.getCuuHoVM().loadAllCuuHo();
     }
 
@@ -151,6 +185,7 @@ public class FmHoDanCreate extends FmBaseCreate {
             edtName.setText(form.getName());
             edtLocation.setText(form.getLocation());
             edtPhone.setText(form.getPhone());
+            loadData();
         };
     }
 

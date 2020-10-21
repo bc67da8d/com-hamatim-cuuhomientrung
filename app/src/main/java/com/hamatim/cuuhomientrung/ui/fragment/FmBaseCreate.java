@@ -1,6 +1,5 @@
 package com.hamatim.cuuhomientrung.ui.fragment;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,21 +17,19 @@ import androidx.lifecycle.Observer;
 
 import com.hamatim.cuuhomientrung.R;
 import com.hamatim.cuuhomientrung.callback.SpinnerSelectedCallback;
+import com.hamatim.cuuhomientrung.model.Base;
+import com.hamatim.cuuhomientrung.model.BasicModel;
 import com.hamatim.cuuhomientrung.model.CuuHo;
 import com.hamatim.cuuhomientrung.model.Event;
-import com.hamatim.cuuhomientrung.model.HoDan;
 import com.hamatim.cuuhomientrung.model.Huyen;
 import com.hamatim.cuuhomientrung.model.Tinh;
 import com.hamatim.cuuhomientrung.model.TinhNguyenVien;
 import com.hamatim.cuuhomientrung.model.Xa;
 import com.hamatim.cuuhomientrung.provider.ProviderVM;
-import com.hamatim.cuuhomientrung.util.Constant;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static com.hamatim.cuuhomientrung.util.Constant.CUUHO_STATUS_LIST;
 
 public abstract class FmBaseCreate extends FmBase {
 
@@ -52,6 +49,13 @@ public abstract class FmBaseCreate extends FmBase {
     protected abstract Observer<? super Event> getEventWatcher();
     protected abstract void onFormSubmit();
     protected abstract String[] getStatusList();
+
+    protected abstract int getCurrentStatus();
+    protected abstract int getCurrentCuuHoId();
+    protected abstract int getCurrentTinhNguyenVienId();
+    protected abstract int getCurrentTinhId();
+    protected abstract int getCurrentHuyenId();
+    protected abstract int getCurrentXaId();
 
     public FmBaseCreate() {
         setHasOptionsMenu(true);
@@ -179,12 +183,14 @@ public abstract class FmBaseCreate extends FmBase {
         ProviderVM.getHoDanVM().watchEvent()
                 .observe(getViewLifecycleOwner(), getEventWatcher());
 
+        attachArrayToSpinner(spStatus, getStatusList());
+    }
+
+    protected void loadData(){
         ProviderVM.getTinhVM().loadAllTinh();
         ProviderVM.getHuyenVM().loadAllHuyen();
         ProviderVM.getXaVM().loadAllXa();
         ProviderVM.getTinhNguyenVienVM().loadAllTinhNuyenVien();
-
-        attachArrayToSpinner(spStatus, getStatusList());
     }
 
     private Observer<? super List<TinhNguyenVien>> getTNVListWatcher() {
@@ -211,7 +217,7 @@ public abstract class FmBaseCreate extends FmBase {
         };
     }
 
-    protected String[] toStringArray(List list) {
+    protected String[] toStringArray(List<? extends Base> list) {
         String[] names = new String[list.size() + 1];
         names[0] = "Chưa biết";
         int i = 1;

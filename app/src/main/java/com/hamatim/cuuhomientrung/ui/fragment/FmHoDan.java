@@ -8,7 +8,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +33,7 @@ import java.util.List;
 public class FmHoDan extends FmBaseList<HoDan, AdapterHoDan> implements ViewCallBack<HoDan> {
 
     SwipeRefreshLayout swpLayout;
+    Spinner spStatusFilter;
 
     @Override
     protected int getLayoutId() {
@@ -57,7 +60,21 @@ public class FmHoDan extends FmBaseList<HoDan, AdapterHoDan> implements ViewCall
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = super.onCreateView(inflater, container, savedInstanceState);
         swpLayout = root.findViewById(R.id.swpLayout);
+        spStatusFilter = root.findViewById(R.id.spStatusFilter);
         swpLayout.setOnRefreshListener(() -> ProviderVM.getHoDanVM().loadAllHoDan());
+        spStatusFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                if (view != null){
+                    ProviderVM.getHoDanVM().filterByStatus(position);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         return root;
     }
 
